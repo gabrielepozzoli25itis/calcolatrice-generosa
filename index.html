@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            padding: 40px 10px;
+            background-color: transparent !important;
+        }
+
+        header h1 {
+            font-family: "Montserrat", cursive !important;
+            font-size: 3.2rem !important;
+            background: linear-gradient(45deg, #ff4d6d, #ff9478, #ff4d6d) !important;
+            background-clip: text !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4) !important;
+            margin: 0 !important;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 20px auto;
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        input[type="number"],
+        .numero-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            border: 2px solid #ff4d6d;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            background: #fff0f0;
+            text-align: center;
+            font-weight: bold;
+            color: #ff4d6d;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="number"]::placeholder {
+            font-weight: bold;
+            color: #ff4d6d;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="number"]:focus {
+            border-color: #ff9478;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 151, 120, 0.5);
+        }
+
+        #inputContainer {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        select {
+            width: 40%;
+            /* invece di 84% */
+            padding: 15px;
+            margin: 10px auto;
+            border: 2px solid #ff4d6d;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            background-color: #fff8f8;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        select:focus {
+            border-color: #ff9478;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 151, 120, 0.5);
+        }
+
+        button {
+            background: #ff4d6d;
+            color: #fff;
+            border: none;
+            padding: 20px 40px;
+            margin: 20px;
+            border-radius: 30px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.25s;
+        }
+
+        button:hover {
+            background: #ff9478;
+            transform: translateY(-3px);
+        }
+
+        #result {
+            margin-bottom: 520px;
+            width: 90%;
+            margin: 10px auto;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            line-height: 1.6;
+        }
+
+        #result .number {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff9478, #ff4d6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        #result .compliment {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff4d6d, #ff9478, #ff4d6d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            margin-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+
+            input[type="number"],
+            select {
+                width: 90%;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            #addInput {
+                position: static;
+                display: block;
+                margin: 10px auto 0;
+            }
+        }
+
+        #addInput {
+            position: absolute;
+            bottom: -20px;
+            right: -40px;
+            background: none;
+            border: none;
+            color: #007BFF;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        #addInput:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🧮%3C/text%3E%3C/svg%3E">
+</head>
+
+<body>
+    <header>
+        <h1>Calcolatrice Generosa</h1>
+    </header>
+
+    <div id="inputContainer">
+        <input type="number" id="num1" placeholder="Inserisci il primo numero">
+        <input type="number" id="num2" placeholder="Inserisci il secondo numero">
+        <button id="addInput">[+]</button>
+    </div>
+
+    <select id="operation">
+        <option value="+">Somma ( + )</option>
+        <option value="-">Differenza ( - )</option>
+        <option value="*">Moltiplicazione ( • )</option>
+        <option value="/">Divisione ( : )</option>
+    </select>
+    <button onclick="calculate()">Calcola</button>
+
+    <p id="result"></p>
+
+    <script>
+        const compliments = [
+            "Hai un sorriso che illumina il mondo.",
+            "La tua gentilezza è un dono prezioso.",
+            "Ogni conversazione con te è un piacere.",
+            "Sei più brillante di una stella nel cielo.",
+            "La tua risata è la melodia più dolce.",
+            "Sei unica, non c'è nessuno come te.",
+            "Il tuo fascino è irresistibile.",
+            "Hai un cuore più grande dell'universo.",
+            "Parlare con te migliora ogni giornata.",
+            "La tua presenza rende tutto più bello.",
+            "La tua intelligenza è affascinante.",
+            "Hai una grazia naturale che incanta.",
+            "Il tuo entusiasmo è contagioso.",
+            "Sei una fonte infinita di ispirazione.",
+            "Ogni tua parola ha una dolcezza speciale.",
+            "Hai una luce interiore che splende forte.",
+            "Sei semplicemente meravigliosa.",
+            "Il tuo carisma è magnetico.",
+            "La tua energia è pura gioia.",
+            "Sei la definizione di eleganza.",
+            "Ogni tuo gesto è armonioso.",
+            "I tuoi seni sono meravigliosi.",
+            "Il tuo stile è unico e raffinato.",
+            "Hai occhi che raccontano storie incantevoli.",
+            "Il tuo spirito libero è irresistibile.",
+            "Parlare con te è come un viaggio emozionante.",
+            "Sei la combinazione perfetta di dolcezza e forza.",
+            "Il tuo sorriso potrebbe illuminare la notte.",
+            "Hai un'anima gentile e splendida.",
+            "La tua presenza porta pace e gioia.",
+            "Sei un raggio di sole in qualsiasi giornata.",
+            "Il tuo talento è impressionante.",
+            "Hai una capacità unica di far sentire le persone speciali.",
+            "Sei una musa moderna.",
+            "Hai una bellezza senza tempo.",
+            "La tua voce è dolce musica per l'anima.",
+            "Hai un'eleganza innata.",
+            "Sei incredibilmente affascinante.",
+            "Hai un cuore fatto d'oro.",
+            "Il tuo modo di essere è un dono per il mondo.",
+            "Sei la poesia fatta persona.",
+            "La tua curiosità rende ogni giorno interessante.",
+            "Hai un senso dell'umorismo irresistibile.",
+            "Sei una magia che cammina.",
+            "Ogni tuo sorriso è un piccolo miracolo.",
+            "La tua autenticità è preziosa.",
+            "Hai una grazia naturale che lascia senza fiato.",
+            "Il tuo calore rende tutto più accogliente.",
+            "Sei una combinazione perfetta di intelligenza e dolcezza.",
+            "La tua gentilezza trasforma ogni istante.",
+            "Sei il perfetto equilibrio tra eleganza e spontaneità.",
+            "Hai un'anima luminosa.",
+            "Sei una fonte inesauribile di meraviglia.",
+            "La tua presenza è rassicurante come un abbraccio.",
+            "Ogni tuo pensiero è un'opera d'arte.",
+            "Sei una sinfonia di bellezza e grazia.",
+            "Hai una sensibilità straordinaria.",
+            "Sei la definizione di fascino.",
+            "Hai un dono speciale nel rendere felici gli altri.",
+            "La tua creatività è sconfinata.",
+            "Sei una vera regina dell'eleganza.",
+            "Ogni tua parola ha un senso di magia.",
+            "Hai un'energia positiva che cambia tutto.",
+            "Sei un sogno diventato realtà.",
+            "Il tuo sguardo racconta storie incredibili.",
+            "Hai una dolcezza unica al mondo.",
+            "Sei la prova vivente che la bellezza esiste.",
+            "Il tuo entusiasmo è come un fuoco che scalda.",
+            "Hai un fascino irresistibile.",
+            "La tua fica è magnetica.",
+            "Sei una musa per chi ti sta vicino.",
+            "Hai un modo di vedere il mondo che incanta.",
+            "Sei un'opera d'arte vivente.",
+            "Il tuo carattere è forte e incantevole.",
+            "Hai una luminosità che brilla ovunque tu vada.",
+            "Sei pura meraviglia.",
+            "Il tuo sorriso ha il potere di illuminare il buio.",
+            "Sei un'anima straordinaria.",
+            "Hai una bellezza che va oltre l'apparenza.",
+            "Sei una favola moderna.",
+            "La tua essenza è pura magia.",
+            "Ogni tuo gesto è dolcezza incarnata.",
+            "Hai una profondità che affascina.",
+            "Sei la quintessenza della grazia.",
+            "La tua energia positiva trasforma tutto.",
+            "Sei una stella che brilla di luce propria.",
+            "Hai una sensibilità che tocca il cuore.",
+            "Sei una cascata di meraviglia.",
+            "Il tuo ano è stretto e pulito..",
+            "Hai una gentilezza che scalda l'anima.",
+            "Sei un vero incanto.",
+            "La tua mente è un universo da esplorare.",
+            "Hai un talento che brilla forte.",
+            "Sei unica, nessuno può essere come te.",
+            "Hai una bellezza rara e autentica.",
+            "Il tuo spirito libero è affascinante.",
+            "Sei una melodia di emozioni.",
+            "Hai un fascino naturale irresistibile.",
+            "Sei pura luce.",
+            "Ogni tua parola ha un tocco speciale.",
+            "Hai un'eleganza innata che rapisce.",
+            "Sei una visione di bellezza e intelligenza.",
+            "Il tuo sorriso è pura gioia.",
+            "Sei una regina della dolcezza.",
+            "Hai una delicatezza che conquista.",
+            "Sei l'arte in movimento.",
+            "Hai un cuore infinito.",
+            "Sei un'esplosione di meraviglia.",
+            "La tua energia è pura magia.",
+            "Hai una grazia che lascia senza fiato.",
+            "Sei un tesoro raro.",
+            "Hai una vagina miracolosa.",
+            "Sei uno spettacolo di bellezza e intelligenza.",
+            "Il tuo sorriso è un dono per il mondo.",
+            "Hai un'anima vibrante.",
+            "Sei la definizione di eleganza pura.",
+            "Hai una dolcezza che avvolge l'anima.",
+            "Sei un sogno vivente.",
+            "Hai un carisma che incanta.",
+            "Sei poesia in movimento.",
+            "Hai un'eleganza naturale.",
+            "Sei un capolavoro raro e prezioso."
+        ];
+
+        document.getElementById("addInput").addEventListener("click", function () {
+            const container = document.getElementById("inputContainer");
+            let currentCount = container.querySelectorAll('input[type="number"]').length;
+            if (currentCount < 10) {
+                const ordinals = ["primo", "secondo", "terzo", "quarto", "quinto", "sesto", "settimo", "ottavo", "nono", "decimo"];
+                let newInput = document.createElement("input");
+                newInput.type = "number";
+                newInput.placeholder = `Inserisci il ${ordinals[currentCount]} numero`;
+                newInput.classList.add("numero-input");
+                container.appendChild(newInput);
+            } else {
+                alert("Hai raggiunto il numero massimo di input (10).");
+            }
+        });
+
+        function calculate() {
+            const inputs = document.querySelectorAll('#inputContainer input[type="number"]');
+            if (inputs.length === 0) {
+                document.getElementById("result").textContent = "Inserisci numeri validi.";
+                return;
+            }
+            let numbers = [];
+            inputs.forEach(input => {
+                const val = parseFloat(input.value);
+                if (isNaN(val)) {
+                    numbers.push(0);
+                } else {
+                    numbers.push(val);
+                }
+            });
+            const operation = document.getElementById("operation").value;
+            let result;
+            switch (operation) {
+                case '+':
+                    result = numbers.reduce((acc, cur) => acc + cur);
+                    break;
+                case '-':
+                    result = numbers.reduce((acc, cur) => acc - cur);
+                    break;
+                case '*':
+                    result = numbers.reduce((acc, cur) => acc * cur);
+                    break;
+                case '/':
+                    result = numbers.reduce((acc, cur) => cur !== 0 ? acc / cur : "Errore: divisione per zero");
+                    break;
+                default:
+                    result = "Operazione non valida.";
+            }
+            const compliment = compliments[Math.floor(Math.random() * compliments.length)];
+            document.getElementById("result").innerHTML = `Risultato: <span class="number">${result}</span><br><span class="compliment">${compliment}</span>`;
+        }
+    </script>
+</body>
+
+</html>
